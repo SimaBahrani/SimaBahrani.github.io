@@ -1,0 +1,1206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Dr Sima Bahrani — Quantum Networks Researcher</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300&family=IBM+Plex+Serif:wght@300;400&display=swap" rel="stylesheet" />
+<style>
+/* ═══════════════════════════════════════════════
+   TOKENS — IBM Qiskit palette
+   ═══════════════════════════════════════════════ */
+:root {
+  --purple:   #6929C4;
+  --purple-l: #a56eff;
+  --purple-xl:#d4bbff;
+  --blue:     #1192E8;
+  --blue-l:   #82cfff;
+  --teal:     #009D9A;
+  --teal-l:   #3ddbd9;
+  --teal-xl:  #9ef0f0;
+  --cyan:     #0072c3;
+  --magenta:  #ee5396;
+  --bg:       #060610;
+  --bg2:      #0d0d1f;
+  --bg3:      #131326;
+  --border:   #1e1e3a;
+  --border2:  #2a2a4a;
+  --text:     #e8e8f8;
+  --text-muted:#7070a0;
+  --text-dim: #3a3a60;
+  --mono: 'IBM Plex Mono', monospace;
+  --sans: 'IBM Plex Sans', sans-serif;
+  --serif: 'IBM Plex Serif', serif;
+}
+
+/* ═══════════════════════════════════════════════
+   RESET & BASE
+   ═══════════════════════════════════════════════ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--sans);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+a { color: var(--blue-l); text-decoration: none; }
+a:hover { color: var(--teal-l); }
+
+/* ═══════════════════════════════════════════════
+   GRID BACKGROUND
+   ═══════════════════════════════════════════════ */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(var(--border) 1px, transparent 1px),
+    linear-gradient(90deg, var(--border) 1px, transparent 1px);
+  background-size: 48px 48px;
+  opacity: 0.35;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ═══════════════════════════════════════════════
+   NAV
+   ═══════════════════════════════════════════════ */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  background: rgba(6,6,16,0.85);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 40px;
+  height: 56px;
+}
+
+.nav-logo {
+  font-family: var(--mono);
+  font-size: 13px;
+  color: var(--purple-l);
+  letter-spacing: 0.5px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.nav-logo::before {
+  content: '';
+  display: inline-block;
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--purple);
+  box-shadow: 0 0 10px var(--purple);
+  animation: pulse 2.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%,100% { opacity:1; transform:scale(1); }
+  50%      { opacity:0.5; transform:scale(0.7); }
+}
+
+.nav-links {
+  display: flex;
+  gap: 28px;
+  list-style: none;
+}
+
+.nav-links a {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  transition: color 0.2s;
+}
+
+.nav-links a:hover { color: var(--teal-l); }
+
+/* ═══════════════════════════════════════════════
+   HERO
+   ═══════════════════════════════════════════════ */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding: 120px 40px 80px;
+  overflow: hidden;
+  z-index: 1;
+}
+
+/* Radial glow behind hero text */
+.hero::after {
+  content: '';
+  position: absolute;
+  top: 20%; left: 30%;
+  width: 700px; height: 700px;
+  background: radial-gradient(ellipse, rgba(105,41,196,0.12) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.hero-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  gap: 64px;
+  align-items: center;
+  position: relative;
+  z-index: 2;
+}
+
+.hero-eyebrow {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--teal);
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.hero-eyebrow::before {
+  content: '';
+  display: inline-block;
+  width: 24px; height: 1px;
+  background: var(--teal);
+}
+
+h1.hero-name {
+  font-family: var(--sans);
+  font-weight: 300;
+  font-size: clamp(38px, 5vw, 62px);
+  line-height: 1.1;
+  color: #fff;
+  letter-spacing: -1px;
+  margin-bottom: 6px;
+}
+
+h1.hero-name span {
+  font-weight: 600;
+  background: linear-gradient(135deg, var(--purple-l), var(--blue-l));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.hero-role {
+  font-family: var(--mono);
+  font-size: 14px;
+  color: var(--text-muted);
+  margin-bottom: 28px;
+  letter-spacing: 0.3px;
+}
+
+.hero-role strong {
+  color: var(--blue-l);
+  font-weight: 400;
+}
+
+.hero-desc {
+  font-size: 16px;
+  color: #9898b8;
+  line-height: 1.75;
+  max-width: 540px;
+  margin-bottom: 36px;
+  font-weight: 300;
+}
+
+/* Quantum state equation */
+.qstate {
+  font-family: var(--mono);
+  font-size: 13px;
+  color: var(--text-dim);
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--purple);
+  padding: 12px 18px;
+  border-radius: 4px;
+  margin-bottom: 36px;
+  display: inline-block;
+}
+
+.qstate span { color: var(--purple-l); }
+
+/* CTA buttons */
+.hero-cta {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.btn {
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.5px;
+  padding: 11px 22px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid;
+}
+
+.btn-primary {
+  background: var(--purple);
+  border-color: var(--purple);
+  color: #fff;
+}
+.btn-primary:hover { background: #7c38e0; border-color: #7c38e0; color: #fff; transform: translateY(-1px); }
+
+.btn-secondary {
+  background: transparent;
+  border-color: var(--border2);
+  color: var(--text-muted);
+}
+.btn-secondary:hover { border-color: var(--blue); color: var(--blue-l); transform: translateY(-1px); }
+
+/* Hero visual card */
+.hero-card {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 28px;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--purple), var(--blue), var(--teal));
+}
+
+.card-avatar {
+  width: 72px; height: 72px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--purple), var(--blue));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--mono);
+  font-size: 20px;
+  font-weight: 500;
+  color: #fff;
+  margin-bottom: 16px;
+  box-shadow: 0 0 30px rgba(105,41,196,0.3);
+}
+
+.card-name { font-size: 16px; font-weight: 500; color: #fff; margin-bottom: 3px; }
+.card-inst { font-family: var(--mono); font-size: 11px; color: var(--teal); margin-bottom: 20px; }
+
+.card-stat-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.cstat {
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 10px 12px;
+  text-align: center;
+}
+
+.cstat .n {
+  font-family: var(--mono);
+  font-size: 20px;
+  font-weight: 500;
+  color: var(--blue-l);
+  display: block;
+  line-height: 1;
+  margin-bottom: 3px;
+}
+
+.cstat .l {
+  font-size: 10px;
+  color: var(--text-dim);
+  letter-spacing: 0.3px;
+}
+
+.card-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.cbadge {
+  font-family: var(--mono);
+  font-size: 10px;
+  padding: 3px 8px;
+  border-radius: 3px;
+  letter-spacing: 0.3px;
+}
+.cbadge.purple { background: rgba(105,41,196,0.2); color: var(--purple-xl); border: 1px solid rgba(105,41,196,0.4); }
+.cbadge.blue   { background: rgba(17,146,232,0.15); color: var(--blue-l); border: 1px solid rgba(17,146,232,0.35); }
+.cbadge.teal   { background: rgba(0,157,154,0.15); color: var(--teal-xl); border: 1px solid rgba(0,157,154,0.35); }
+
+/* ═══════════════════════════════════════════════
+   SHARED SECTION STYLES
+   ═══════════════════════════════════════════════ */
+section {
+  position: relative;
+  z-index: 1;
+  padding: 80px 40px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.section-label {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--blue);
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.section-label::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+  max-width: 60px;
+}
+
+.section-title {
+  font-family: var(--sans);
+  font-size: 28px;
+  font-weight: 500;
+  color: #fff;
+  margin-bottom: 40px;
+  letter-spacing: -0.5px;
+}
+
+/* Divider between full-width sections */
+.full-divider {
+  width: 100%;
+  height: 1px;
+  background: var(--border);
+  position: relative;
+  z-index: 1;
+}
+
+/* ═══════════════════════════════════════════════
+   RESEARCH FOCUS
+   ═══════════════════════════════════════════════ */
+.research-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 16px;
+}
+
+.res-card {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 24px;
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.25s, transform 0.25s;
+  cursor: default;
+}
+
+.res-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--border2);
+}
+
+.res-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  transition: opacity 0.25s;
+}
+
+.res-card.c-purple::before { background: linear-gradient(90deg, var(--purple), var(--purple-l)); }
+.res-card.c-blue::before   { background: linear-gradient(90deg, var(--blue), var(--blue-l)); }
+.res-card.c-teal::before   { background: linear-gradient(90deg, var(--teal), var(--teal-l)); }
+.res-card.c-magenta::before{ background: linear-gradient(90deg, var(--magenta), #f98fbf); }
+
+.res-icon {
+  font-size: 24px;
+  margin-bottom: 14px;
+  display: block;
+}
+
+.res-card h3 {
+  font-size: 14px;
+  font-weight: 500;
+  color: #fff;
+  margin-bottom: 8px;
+  font-family: var(--sans);
+}
+
+.res-card p {
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+/* ═══════════════════════════════════════════════
+   PUBLICATIONS
+   ═══════════════════════════════════════════════ */
+.pub-section { background: var(--bg2); padding: 80px 0; }
+.pub-inner   { max-width: 1100px; margin: 0 auto; padding: 0 40px; }
+
+.pub-list { display: flex; flex-direction: column; gap: 12px; }
+
+.pub-item {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 18px 20px;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 16px;
+  align-items: start;
+  transition: border-color 0.2s;
+}
+
+.pub-item:hover { border-color: var(--border2); }
+
+.pub-venue {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  padding: 4px 8px;
+  border-radius: 3px;
+  white-space: nowrap;
+  margin-top: 2px;
+}
+
+.pub-venue.npj    { background: rgba(105,41,196,0.18); color: var(--purple-xl); border: 1px solid rgba(105,41,196,0.35); }
+.pub-venue.ieee   { background: rgba(17,146,232,0.15);  color: var(--blue-l);   border: 1px solid rgba(17,146,232,0.3); }
+.pub-venue.nature { background: rgba(0,157,154,0.15);   color: var(--teal-xl);  border: 1px solid rgba(0,157,154,0.3); }
+.pub-venue.prx    { background: rgba(238,83,150,0.15);  color: #f4a8cc;         border: 1px solid rgba(238,83,150,0.3); }
+
+.pub-text { }
+.pub-title { font-size: 14px; color: var(--text); line-height: 1.5; margin-bottom: 4px; }
+.pub-meta  { font-family: var(--mono); font-size: 11px; color: var(--text-muted); }
+
+.pub-year {
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--text-dim);
+  white-space: nowrap;
+  padding-top: 3px;
+}
+
+.pub-more {
+  text-align: center;
+  margin-top: 28px;
+}
+
+/* ═══════════════════════════════════════════════
+   TIMELINE
+   ═══════════════════════════════════════════════ */
+.timeline-wrap {
+  position: relative;
+  padding-left: 2px;
+}
+
+.tl-track {
+  position: absolute;
+  left: 0; top: 14px; bottom: 0;
+  width: 1px;
+  background: linear-gradient(180deg, var(--purple) 0%, var(--blue) 50%, var(--teal) 100%);
+  opacity: 0.6;
+}
+
+.tl-entry {
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  gap: 24px;
+  padding: 0 0 36px 28px;
+  position: relative;
+}
+
+.tl-entry::before {
+  content: '';
+  position: absolute;
+  left: -4px;
+  top: 8px;
+  width: 9px; height: 9px;
+  border-radius: 50%;
+  background: var(--blue);
+  border: 2px solid var(--bg);
+  box-shadow: 0 0 8px rgba(17,146,232,0.5);
+}
+
+.tl-period {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--teal);
+  line-height: 1.4;
+  padding-top: 2px;
+}
+
+.tl-content {}
+.tl-role {
+  font-size: 15px;
+  font-weight: 500;
+  color: #fff;
+  margin-bottom: 2px;
+}
+
+.tl-org {
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--blue-l);
+  margin-bottom: 8px;
+}
+
+.tl-detail {
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.65;
+}
+
+/* ═══════════════════════════════════════════════
+   TECH / SKILLS
+   ═══════════════════════════════════════════════ */
+.skills-section { background: var(--bg2); padding: 80px 0; }
+.skills-inner   { max-width: 1100px; margin: 0 auto; padding: 0 40px; }
+
+.skill-groups { display: flex; flex-direction: column; gap: 24px; }
+
+.sg-row {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+.sg-label {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  min-width: 130px;
+  padding-top: 5px;
+  flex-shrink: 0;
+}
+
+.tags { display: flex; flex-wrap: wrap; gap: 7px; }
+
+.tag {
+  font-family: var(--mono);
+  font-size: 12px;
+  padding: 5px 12px;
+  border-radius: 4px;
+  border: 1px solid;
+  letter-spacing: 0.3px;
+  transition: opacity 0.2s;
+}
+.tag:hover { opacity: 0.75; }
+
+.tag.purple { color: var(--purple-xl); border-color: rgba(105,41,196,0.4); background: rgba(105,41,196,0.12); }
+.tag.blue   { color: var(--blue-l);   border-color: rgba(17,146,232,0.35);  background: rgba(17,146,232,0.10); }
+.tag.teal   { color: var(--teal-xl);  border-color: rgba(0,157,154,0.35);   background: rgba(0,157,154,0.10); }
+.tag.gray   { color: #8090a8;         border-color: rgba(80,90,120,0.4);    background: rgba(80,90,120,0.10); }
+
+/* ═══════════════════════════════════════════════
+   HONOURS
+   ═══════════════════════════════════════════════ */
+.honours-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 14px;
+}
+
+.honour-item {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 16px 18px;
+  transition: border-color 0.2s;
+}
+
+.honour-item:hover { border-color: var(--border2); }
+
+.h-icon {
+  font-size: 18px;
+  flex-shrink: 0;
+  width: 30px;
+  text-align: center;
+  padding-top: 1px;
+}
+
+.h-text { font-size: 13px; color: #b0b0cc; line-height: 1.55; }
+.h-text strong { color: #fff; font-weight: 500; display: block; margin-bottom: 2px; }
+
+/* ═══════════════════════════════════════════════
+   ACTIVE PROJECTS
+   ═══════════════════════════════════════════════ */
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 14px;
+}
+
+.proj-card {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 22px;
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.25s, transform 0.25s;
+}
+
+.proj-card:hover {
+  border-color: var(--border2);
+  transform: translateY(-2px);
+}
+
+.proj-accent {
+  display: inline-block;
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  padding: 3px 8px;
+  border-radius: 2px;
+  margin-bottom: 12px;
+}
+
+.proj-accent.purple { background: rgba(105,41,196,0.2); color: var(--purple-l); border: 1px solid rgba(105,41,196,0.4); }
+.proj-accent.blue   { background: rgba(17,146,232,0.15); color: var(--blue-l); border: 1px solid rgba(17,146,232,0.35); }
+.proj-accent.teal   { background: rgba(0,157,154,0.15);  color: var(--teal-l); border: 1px solid rgba(0,157,154,0.35); }
+
+.proj-card h3 { font-size: 15px; font-weight: 500; color: #fff; margin-bottom: 6px; }
+.proj-role    { font-family: var(--mono); font-size: 11px; color: var(--blue-l); margin-bottom: 8px; }
+.proj-desc    { font-size: 13px; color: var(--text-muted); line-height: 1.6; }
+
+/* ═══════════════════════════════════════════════
+   CONTACT
+   ═══════════════════════════════════════════════ */
+.contact-section {
+  text-align: center;
+  padding: 80px 40px 100px;
+  position: relative;
+  z-index: 1;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.contact-section::before {
+  content: '';
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 600px; height: 400px;
+  background: radial-gradient(ellipse, rgba(17,146,232,0.06) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.contact-title {
+  font-family: var(--sans);
+  font-size: 36px;
+  font-weight: 300;
+  color: #fff;
+  margin-bottom: 12px;
+}
+
+.contact-title strong { font-weight: 600; color: var(--blue-l); }
+
+.contact-sub {
+  font-size: 15px;
+  color: var(--text-muted);
+  margin-bottom: 40px;
+  font-weight: 300;
+}
+
+.contact-links {
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+/* ═══════════════════════════════════════════════
+   FOOTER
+   ═══════════════════════════════════════════════ */
+footer {
+  position: relative;
+  z-index: 1;
+  border-top: 1px solid var(--border);
+  background: var(--bg2);
+  padding: 24px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.footer-left {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--text-dim);
+}
+
+.footer-right {
+  display: flex;
+  gap: 20px;
+}
+
+.footer-right a {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--text-dim);
+  transition: color 0.2s;
+}
+.footer-right a:hover { color: var(--teal-l); }
+
+/* ═══════════════════════════════════════════════
+   ANIMATIONS
+   ═══════════════════════════════════════════════ */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.hero-eyebrow  { animation: fadeUp 0.6s ease both; animation-delay: 0.1s; }
+h1.hero-name   { animation: fadeUp 0.6s ease both; animation-delay: 0.2s; }
+.hero-role     { animation: fadeUp 0.6s ease both; animation-delay: 0.3s; }
+.hero-desc     { animation: fadeUp 0.6s ease both; animation-delay: 0.4s; }
+.qstate        { animation: fadeUp 0.6s ease both; animation-delay: 0.5s; }
+.hero-cta      { animation: fadeUp 0.6s ease both; animation-delay: 0.6s; }
+.hero-card     { animation: fadeUp 0.6s ease both; animation-delay: 0.35s; }
+
+/* ═══════════════════════════════════════════════
+   RESPONSIVE
+   ═══════════════════════════════════════════════ */
+@media (max-width: 900px) {
+  .hero-inner { grid-template-columns: 1fr; }
+  .hero-card  { display: none; }
+  nav { padding: 0 20px; }
+  .nav-links { gap: 16px; }
+  section, .pub-inner, .skills-inner { padding-left: 20px; padding-right: 20px; }
+  footer { padding: 20px; }
+}
+
+@media (max-width: 600px) {
+  .tl-entry { grid-template-columns: 1fr; gap: 4px; }
+  .tl-period { padding-bottom: 4px; }
+  .nav-links { display: none; }
+  .pub-item { grid-template-columns: 1fr; }
+  .pub-year { display: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- ── Navigation ── -->
+<nav>
+  <div class="nav-logo">SimaBahrani</div>
+  <ul class="nav-links">
+    <li><a href="#research">Research</a></li>
+    <li><a href="#publications">Publications</a></li>
+    <li><a href="#career">Career</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- ── Hero ── -->
+<div class="hero">
+  <div class="hero-inner">
+    <div>
+      <div class="hero-eyebrow">Quantum Networks &amp; Cryptography</div>
+      <h1 class="hero-name">Dr<br/><span>Sima Bahrani</span></h1>
+      <p class="hero-role">Research Fellow &nbsp;·&nbsp; <strong>University of Bristol</strong> &nbsp;·&nbsp; Research Co-Lead, IQN Hub</p>
+      <p class="hero-desc">
+        Senior researcher specialising in QKD security analysis, quantum network simulation, and scalable quantum repeater architectures. Building the infrastructure for a secure quantum internet.
+      </p>
+      <div class="qstate"><span>|ψ⟩</span> = α<span>|secure⟩</span> + β<span>|entangled⟩</span> + γ<span>|scalable⟩</span></div>
+      <div class="hero-cta">
+        <a class="btn btn-primary" href="https://scholar.google.com/citations?user=liMRZqwAAAAJ&sortby=pubdate" target="_blank">↗ Google Scholar</a>
+        <a class="btn btn-secondary" href="https://github.com/SimaBahrani" target="_blank">GitHub ↗</a>
+        <a class="btn btn-secondary" href="mailto:sima.bahrani@bristol.ac.uk">Contact</a>
+      </div>
+    </div>
+
+    <!-- Profile card -->
+    <div class="hero-card">
+      <div class="card-avatar">SB</div>
+      <div class="card-name">Dr Sima Bahrani</div>
+      <div class="card-inst">// bristol.ac.uk</div>
+      <div class="card-stat-grid">
+        <div class="cstat"><span class="n">10+</span><span class="l">journal papers</span></div>
+        <div class="cstat"><span class="n">20+</span><span class="l">conf. papers</span></div>
+        <div class="cstat"><span class="n">8+</span><span class="l">yrs post-PhD</span></div>
+        <div class="cstat"><span class="n">5+</span><span class="l">major projects</span></div>
+      </div>
+      <div class="card-badges">
+        <span class="cbadge purple">QKD</span>
+        <span class="cbadge blue">Quantum Networks</span>
+        <span class="cbadge teal">PQC</span>
+        <span class="cbadge purple">Repeaters</span>
+        <span class="cbadge blue">NetSquid</span>
+        <span class="cbadge teal">Qiskit</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="full-divider"></div>
+
+<!-- ── Research Focus ── -->
+<section id="research">
+  <div class="section-label">Research focus</div>
+  <div class="section-title">What I work on</div>
+  <div class="research-grid">
+    <div class="res-card c-purple">
+      <span class="res-icon">🔐</span>
+      <h3>QKD Security Analysis</h3>
+      <p>Finite-size effects, system imperfections, and protocol benchmarking in real-world quantum access and satellite networks.</p>
+    </div>
+    <div class="res-card c-blue">
+      <span class="res-icon">🌐</span>
+      <h3>Quantum Network Design</h3>
+      <p>Wavelength assignment, quantum-classical coexistence over hollow-core fibre, and dynamic entanglement distribution.</p>
+    </div>
+    <div class="res-card c-teal">
+      <span class="res-icon">⚛️</span>
+      <h3>Quantum Repeater Networks</h3>
+      <p>Blueprint architectures for scalable entanglement distribution and performance modelling for next-generation quantum networks.</p>
+    </div>
+    <div class="res-card c-magenta">
+      <span class="res-icon">🛡️</span>
+      <h3>Post-Quantum Cryptography</h3>
+      <p>Hybrid QKD + PQC security planes for optical transport networks and distributed quantum computing interconnects.</p>
+    </div>
+  </div>
+</section>
+
+<div class="full-divider"></div>
+
+<!-- ── Publications ── -->
+<div class="pub-section" id="publications">
+  <div class="pub-inner">
+    <div class="section-label">Publications</div>
+    <div class="section-title">Selected work</div>
+    <div class="pub-list">
+
+      <div class="pub-item">
+        <span class="pub-venue npj">npj</span>
+        <div class="pub-text">
+          <div class="pub-title">Coexistence of entanglement-based quantum channels with DWDM classical channels over hollow-core fibre in a four-node quantum network</div>
+          <div class="pub-meta">Clark, Alia, Bahrani et al. &nbsp;·&nbsp; npj Quantum Information</div>
+        </div>
+        <div class="pub-year">2025</div>
+      </div>
+
+      <div class="pub-item">
+        <span class="pub-venue ieee">IEEE</span>
+        <div class="pub-text">
+          <div class="pub-title">Quantum repeater architectures in the hollow-core fibre era: performance and design implications</div>
+          <div class="pub-meta">Bahrani, Jain, Wang, Simeonidou &nbsp;·&nbsp; IEEE QCNC</div>
+        </div>
+        <div class="pub-year">2026</div>
+      </div>
+
+      <div class="pub-item">
+        <span class="pub-venue prx">PRX</span>
+        <div class="pub-text">
+          <div class="pub-title">Satellite-based quantum key distribution in the presence of bypass channels</div>
+          <div class="pub-meta">Ghalaii, Bahrani et al. &nbsp;·&nbsp; PRX Quantum, 4(4), p.040320</div>
+        </div>
+        <div class="pub-year">2023</div>
+      </div>
+
+      <div class="pub-item">
+        <span class="pub-venue nature">Sci</span>
+        <div class="pub-text">
+          <div class="pub-title">Benchmarking of quantum protocols <em style="font-style:normal;color:var(--text-dim)">(co-first author)</em></div>
+          <div class="pub-meta">Bahrani, Liao, da Silva, Kashefi &nbsp;·&nbsp; Scientific Reports 12, p.5298</div>
+        </div>
+        <div class="pub-year">2022</div>
+      </div>
+
+      <div class="pub-item">
+        <span class="pub-venue ieee">JLT</span>
+        <div class="pub-text">
+          <div class="pub-title">DV-QKD coexistence with 1.6 Tbps classical channels over hollow-core fibre</div>
+          <div class="pub-meta">Alia, Tessinari, Bahrani et al. &nbsp;·&nbsp; Journal of Lightwave Technology, 40(16)</div>
+        </div>
+        <div class="pub-year">2022</div>
+      </div>
+
+      <div class="pub-item">
+        <span class="pub-venue nature">Nature</span>
+        <div class="pub-text">
+          <div class="pub-title">Wavelength assignment in hybrid quantum-classical networks</div>
+          <div class="pub-meta">Bahrani, Razavi, Salehi &nbsp;·&nbsp; Scientific Reports, Nature, 8(1), p.3456</div>
+        </div>
+        <div class="pub-year">2018</div>
+      </div>
+
+      <div class="pub-item">
+        <span class="pub-venue ieee">JOSA B</span>
+        <div class="pub-text">
+          <div class="pub-title">Wavelength assignment in quantum access networks with hybrid wireless-fibre links</div>
+          <div class="pub-meta">Bahrani, Elmabrok, Lorenzo, Razavi &nbsp;·&nbsp; Journal of the Optical Society of America B</div>
+        </div>
+        <div class="pub-year">2019</div>
+      </div>
+
+    </div>
+    <div class="pub-more">
+      <a class="btn btn-secondary" href="https://scholar.google.com/citations?user=liMRZqwAAAAJ&sortby=pubdate" target="_blank">View all publications on Google Scholar ↗</a>
+    </div>
+  </div>
+</div>
+
+<div class="full-divider"></div>
+
+<!-- ── Career Timeline ── -->
+<section id="career">
+  <div class="section-label">Experience</div>
+  <div class="section-title">Career timeline</div>
+  <div class="timeline-wrap">
+    <div class="tl-track"></div>
+
+    <div class="tl-entry">
+      <div class="tl-period">2026<br/>– present</div>
+      <div class="tl-content">
+        <div class="tl-role">Research Fellow</div>
+        <div class="tl-org">University of Bristol · School of EEME</div>
+        <div class="tl-detail">Research Co-Lead, UK Integrated Quantum Networks (IQN) Hub. Leading blueprint architectures for scalable quantum repeater networks and entanglement distribution. Also leading the VELOX-QP photonic processor interconnect programme and coordinating Allegro network security deliverables.</div>
+      </div>
+    </div>
+
+    <div class="tl-entry">
+      <div class="tl-period">2021<br/>– 2026</div>
+      <div class="tl-content">
+        <div class="tl-role">Senior Research Associate in Dynamic Quantum Networks</div>
+        <div class="tl-org">University of Bristol</div>
+        <div class="tl-detail">Dynamic entanglement-based QKD network implementation; QKD post-processing pipeline in C++; distributed quantum computing interconnect and resource optimisation; QDCoF multi-user secure quantum data centre access network.</div>
+      </div>
+    </div>
+
+    <div class="tl-entry">
+      <div class="tl-period">2019<br/>– 2021</div>
+      <div class="tl-content">
+        <div class="tl-role">Research Associate</div>
+        <div class="tl-org">University of Edinburgh · School of Informatics</div>
+        <div class="tl-detail">Quantum Internet Alliance (QIA) — performance analysis and benchmarking of quantum cryptographic protocols including QKD and quantum digital signatures.</div>
+      </div>
+    </div>
+
+    <div class="tl-entry">
+      <div class="tl-period">2017<br/>– 2019</div>
+      <div class="tl-content">
+        <div class="tl-role">Research Fellow</div>
+        <div class="tl-org">University of Leeds · School of Electronic & Electrical Engineering</div>
+        <div class="tl-detail">UK Quantum Communications Hub — finite-size security analysis of QKD protocols in quantum access networks, wavelength assignment, and quantum-classical channel coexistence with wireless-fibre hybrid links.</div>
+      </div>
+    </div>
+
+    <div class="tl-entry">
+      <div class="tl-period">2013<br/>– 2017</div>
+      <div class="tl-content">
+        <div class="tl-role">PhD in Electrical Engineering</div>
+        <div class="tl-org">Sharif University of Technology, Tehran, Iran</div>
+        <div class="tl-detail">Thesis: <em>Quantum key distribution in quantum networks.</em> Research assistant in the Optical Networks Research Lab (ONRL), Department of Electrical Engineering.</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="full-divider"></div>
+
+<!-- ── Tools & Languages ── -->
+<div class="skills-section">
+  <div class="skills-inner">
+    <div class="section-label">Tools &amp; languages</div>
+    <div class="section-title">Technical stack</div>
+    <div class="skill-groups">
+      <div class="sg-row">
+        <div class="sg-label">Quantum simulation</div>
+        <div class="tags">
+          <span class="tag purple">NetSquid</span>
+          <span class="tag purple">SeQUeNCe</span>
+          <span class="tag purple">Qiskit</span>
+          <span class="tag purple">Pytket</span>
+        </div>
+      </div>
+      <div class="sg-row">
+        <div class="sg-label">Programming</div>
+        <div class="tags">
+          <span class="tag blue">Python</span>
+          <span class="tag blue">C++</span>
+          <span class="tag blue">C</span>
+          <span class="tag blue">NetworkX</span>
+          <span class="tag blue">Python-MIP</span>
+        </div>
+      </div>
+      <div class="sg-row">
+        <div class="sg-label">Modelling &amp; analysis</div>
+        <div class="tags">
+          <span class="tag teal">MATLAB</span>
+          <span class="tag teal">Mathematica</span>
+        </div>
+      </div>
+      <div class="sg-row">
+        <div class="sg-label">Infrastructure</div>
+        <div class="tags">
+          <span class="tag gray">Linux</span>
+          <span class="tag gray">Git</span>
+          <span class="tag gray">GitHub</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="full-divider"></div>
+
+<!-- ── Active Projects ── -->
+<section id="projects">
+  <div class="section-label">Active projects</div>
+  <div class="section-title">Current work</div>
+  <div class="projects-grid">
+
+    <div class="proj-card">
+      <span class="proj-accent purple">2025 – present</span>
+      <h3>UK IQN Hub</h3>
+      <div class="proj-role">Research Co-Lead</div>
+      <p class="proj-desc">Leading blueprint architectures for scalable quantum networks including quantum repeater networks and entanglement distribution. Coordinating multi-partner research activities and technical direction.</p>
+    </div>
+
+    <div class="proj-card">
+      <span class="proj-accent blue">2025 – present</span>
+      <h3>VELOX-QP</h3>
+      <div class="proj-role">PI (Bristol)</div>
+      <p class="proj-desc">Leading research on design and development of architectures for interconnecting photonic quantum processor chips. Coordinating technical deliverables and progress reporting.</p>
+    </div>
+
+    <div class="proj-card">
+      <span class="proj-accent teal">2023 – present</span>
+      <h3>Allegro</h3>
+      <div class="proj-role">Lead Technical Rep — WP4 &amp; WP6</div>
+      <p class="proj-desc">Developing a hybrid QKD + PQC security plane architecture for ultra-low-energy optical transport networks, in collaboration with European partners.</p>
+    </div>
+
+  </div>
+</section>
+
+<div class="full-divider"></div>
+
+<!-- ── Honours ── -->
+<section>
+  <div class="section-label">Honours &amp; service</div>
+  <div class="section-title">Community &amp; recognition</div>
+  <div class="honours-grid">
+
+    <div class="honour-item">
+      <div class="h-icon">🏅</div>
+      <div class="h-text">
+        <strong>UK Global Talent Visa — Exceptional Promise</strong>
+        Endorsed by The Royal Academy of Engineering &amp; the UK Home Office (2022)
+      </div>
+    </div>
+
+    <div class="honour-item">
+      <div class="h-icon">🎤</div>
+      <div class="h-text">
+        <strong>Invited speaker</strong>
+        ECOC · QNetworks Workshop · UK Quantum Technologies Winter School
+      </div>
+    </div>
+
+    <div class="honour-item">
+      <div class="h-icon">🪑</div>
+      <div class="h-text">
+        <strong>Session chair</strong>
+        QNetworks 2026 · IEEE QCNC 2026 (two sessions)
+      </div>
+    </div>
+
+    <div class="honour-item">
+      <div class="h-icon">📋</div>
+      <div class="h-text">
+        <strong>Technical Programme Committee</strong>
+        IEEE INFOCOM 2025 · IEEE ICC 2024 &amp; 2026 · QNetworks 2026
+      </div>
+    </div>
+
+    <div class="honour-item">
+      <div class="h-icon">✏️</div>
+      <div class="h-text">
+        <strong>Reviewer</strong>
+        IEEE JLT · TCOM · JSAC · TNSM · TNET
+      </div>
+    </div>
+
+    <div class="honour-item">
+      <div class="h-icon">🔬</div>
+      <div class="h-text">
+        <strong>Panel member</strong>
+        STFC/EPSRC Quantum for Science Funding Opportunity — Scientific Exchange Visits
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="full-divider"></div>
+
+<!-- ── Contact ── -->
+<div class="contact-section" id="contact">
+  <div class="section-label" style="justify-content:center">Contact</div>
+  <h2 class="contact-title">Let's <strong>connect</strong></h2>
+  <p class="contact-sub">Open to collaborations, invited talks, and research conversations.</p>
+  <div class="contact-links">
+    <a class="btn btn-primary" href="mailto:sima.bahrani@bristol.ac.uk">✉ sima.bahrani@bristol.ac.uk</a>
+    <a class="btn btn-secondary" href="https://scholar.google.com/citations?user=liMRZqwAAAAJ&sortby=pubdate" target="_blank">Google Scholar ↗</a>
+    <a class="btn btn-secondary" href="https://github.com/SimaBahrani" target="_blank">GitHub ↗</a>
+    <a class="btn btn-secondary" href="https://arxiv.org/abs/2409.12675" target="_blank">arXiv preprint ↗</a>
+  </div>
+</div>
+
+<!-- ── Footer ── -->
+<footer>
+  <div class="footer-left">Dr Sima Bahrani · University of Bristol · School of EEME</div>
+  <div class="footer-right">
+    <a href="https://github.com/SimaBahrani" target="_blank">github.com/SimaBahrani</a>
+    <a href="mailto:sima.bahrani@bristol.ac.uk">Email</a>
+  </div>
+</footer>
+
+</body>
+</html>
