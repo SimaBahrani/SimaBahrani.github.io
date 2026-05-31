@@ -476,7 +476,7 @@ section {
   border-radius: 8px;
   padding: 18px 20px;
   display: grid;
-  grid-template-columns: auto 1fr auto;
+  grid-template-columns: 1fr auto;
   gap: 16px;
   align-items: start;
   transition: border-color 0.2s;
@@ -829,7 +829,6 @@ h1.hero-name   { animation: fadeUp 0.6s ease both; animation-delay: 0.2s; }
     <li><a href="#research">Research</a></li>
     <li><a href="#publications">Publications</a></li>
     <li><a href="#career">Career</a></li>
-    <li><a href="#projects">Projects</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
 </nav>
@@ -838,11 +837,11 @@ h1.hero-name   { animation: fadeUp 0.6s ease both; animation-delay: 0.2s; }
 <div class="hero">
   <div class="hero-inner">
     <div>
-      <div class="hero-eyebrow">Quantum Networks &amp; Cryptography</div>
+      <div class="hero-eyebrow">Quantum Networks</div>
       <h1 class="hero-name">Dr<br/><span>Sima Bahrani</span></h1>
-      <p class="hero-role">Research Fellow &nbsp;·&nbsp; <strong>University of Bristol</strong> &nbsp;·&nbsp; Research Co-Lead, IQN Hub</p>
+      <p class="hero-role">Research Fellow &nbsp;·&nbsp; <strong>University of Bristol</strong></p>
       <p class="hero-desc">
-        Senior researcher specialising in QKD security analysis, quantum network simulation, and scalable quantum repeater architectures. Building the infrastructure for a secure quantum internet.
+        Senior researcher in quantum communication, networks, and computation. Research experience in quantum cryptography and QKD, simulation and benchmarking of quantum network protocols, distributed quantum computing, and entanglement distribution networks.
       </p>
       <div class="qstate"><span>|ψ⟩</span> = α<span>|secure⟩</span> + β<span>|entangled⟩</span> + γ<span>|scalable⟩</span></div>
       <div class="hero-cta">
@@ -866,8 +865,8 @@ h1.hero-name   { animation: fadeUp 0.6s ease both; animation-delay: 0.2s; }
       <div class="card-badges">
         <span class="cbadge purple">QKD</span>
         <span class="cbadge blue">Quantum Networks</span>
-        <span class="cbadge teal">PQC</span>
-        <span class="cbadge purple">Repeaters</span>
+        <span class="cbadge teal">DQC</span>
+        <span class="cbadge purple">Q-Repeaters</span>
         <span class="cbadge blue">NetSquid</span>
         <span class="cbadge teal">Qiskit</span>
       </div>
@@ -898,9 +897,9 @@ h1.hero-name   { animation: fadeUp 0.6s ease both; animation-delay: 0.2s; }
       <p>Blueprint architectures for scalable entanglement distribution and performance modelling for next-generation quantum networks.</p>
     </div>
     <div class="res-card c-magenta">
-      <span class="res-icon">🛡️</span>
-      <h3>Post-Quantum Cryptography</h3>
-      <p>Hybrid QKD + PQC security planes for optical transport networks and distributed quantum computing interconnects.</p>
+      <span class="res-icon">💻</span>
+      <h3>Distributed Quantum Computing</h3>
+      <p>Resource management and circuit scheduling for distributed quantum computing interconnect networks, optimising qubit allocation and execution across multi-node quantum processors.</p>
     </div>
   </div>
 </section>
@@ -915,16 +914,6 @@ h1.hero-name   { animation: fadeUp 0.6s ease both; animation-delay: 0.2s; }
     <div class="pub-list">
 
       <div class="pub-item">
-        <span class="pub-venue npj">npj</span>
-        <div class="pub-text">
-          <div class="pub-title">Coexistence of entanglement-based quantum channels with DWDM classical channels over hollow-core fibre in a four-node quantum network</div>
-          <div class="pub-meta">Clark, Alia, Bahrani et al. &nbsp;·&nbsp; npj Quantum Information</div>
-        </div>
-        <div class="pub-year">2025</div>
-      </div>
-
-      <div class="pub-item">
-        <span class="pub-venue ieee">IEEE</span>
         <div class="pub-text">
           <div class="pub-title">Quantum repeater architectures in the hollow-core fibre era: performance and design implications</div>
           <div class="pub-meta">Bahrani, Jain, Wang, Simeonidou &nbsp;·&nbsp; IEEE QCNC</div>
@@ -933,7 +922,6 @@ h1.hero-name   { animation: fadeUp 0.6s ease both; animation-delay: 0.2s; }
       </div>
 
       <div class="pub-item">
-        <span class="pub-venue prx">PRX</span>
         <div class="pub-text">
           <div class="pub-title">Satellite-based quantum key distribution in the presence of bypass channels</div>
           <div class="pub-meta">Ghalaii, Bahrani et al. &nbsp;·&nbsp; PRX Quantum, 4(4), p.040320</div>
@@ -942,7 +930,6 @@ h1.hero-name   { animation: fadeUp 0.6s ease both; animation-delay: 0.2s; }
       </div>
 
       <div class="pub-item">
-        <span class="pub-venue nature">Sci</span>
         <div class="pub-text">
           <div class="pub-title">Benchmarking of quantum protocols <em style="font-style:normal;color:var(--text-dim)">(co-first author)</em></div>
           <div class="pub-meta">Bahrani, Liao, da Silva, Kashefi &nbsp;·&nbsp; Scientific Reports 12, p.5298</div>
@@ -951,7 +938,6 @@ h1.hero-name   { animation: fadeUp 0.6s ease both; animation-delay: 0.2s; }
       </div>
 
       <div class="pub-item">
-        <span class="pub-venue ieee">JLT</span>
         <div class="pub-text">
           <div class="pub-title">DV-QKD coexistence with 1.6 Tbps classical channels over hollow-core fibre</div>
           <div class="pub-meta">Alia, Tessinari, Bahrani et al. &nbsp;·&nbsp; Journal of Lightwave Technology, 40(16)</div>
@@ -960,7 +946,14 @@ h1.hero-name   { animation: fadeUp 0.6s ease both; animation-delay: 0.2s; }
       </div>
 
       <div class="pub-item">
-        <span class="pub-venue nature">Nature</span>
+        <div class="pub-text">
+          <div class="pub-title">Coexistence of entanglement-based quantum channels with DWDM classical channels over hollow-core fibre in a four-node quantum network</div>
+          <div class="pub-meta">Clark, Alia, Bahrani et al. &nbsp;·&nbsp; npj Quantum Information</div>
+        </div>
+        <div class="pub-year">2025</div>
+      </div>
+
+      <div class="pub-item">
         <div class="pub-text">
           <div class="pub-title">Wavelength assignment in hybrid quantum-classical networks</div>
           <div class="pub-meta">Bahrani, Razavi, Salehi &nbsp;·&nbsp; Scientific Reports, Nature, 8(1), p.3456</div>
@@ -969,12 +962,19 @@ h1.hero-name   { animation: fadeUp 0.6s ease both; animation-delay: 0.2s; }
       </div>
 
       <div class="pub-item">
-        <span class="pub-venue ieee">JOSA B</span>
         <div class="pub-text">
           <div class="pub-title">Wavelength assignment in quantum access networks with hybrid wireless-fibre links</div>
           <div class="pub-meta">Bahrani, Elmabrok, Lorenzo, Razavi &nbsp;·&nbsp; Journal of the Optical Society of America B</div>
         </div>
         <div class="pub-year">2019</div>
+      </div>
+
+      <div class="pub-item">
+        <div class="pub-text">
+          <div class="pub-title">Resource management and circuit scheduling for distributed quantum computing interconnect networks <em style="font-style:normal;color:var(--text-dim)">(under review)</em></div>
+          <div class="pub-meta">Bahrani, Oliveira, Parra-Ullauri, Wang, Simeonidou &nbsp;·&nbsp; IEEE JSAC &nbsp;·&nbsp; <a href="https://arxiv.org/abs/2409.12675" target="_blank" style="color:var(--teal-l)">arXiv:2409.12675 ↗</a></div>
+        </div>
+        <div class="pub-year">2024</div>
       </div>
 
     </div>
@@ -998,7 +998,7 @@ h1.hero-name   { animation: fadeUp 0.6s ease both; animation-delay: 0.2s; }
       <div class="tl-content">
         <div class="tl-role">Research Fellow</div>
         <div class="tl-org">University of Bristol · School of EEME</div>
-        <div class="tl-detail">Research Co-Lead, UK Integrated Quantum Networks (IQN) Hub. Leading blueprint architectures for scalable quantum repeater networks and entanglement distribution. Also leading the VELOX-QP photonic processor interconnect programme and coordinating Allegro network security deliverables.</div>
+        <div class="tl-detail">Research Co-Lead, UK Integrated Quantum Networks (IQN) Hub. Leading development of blueprint architectures for scalable entanglement distribution networks.</div>
       </div>
     </div>
 
@@ -1006,17 +1006,8 @@ h1.hero-name   { animation: fadeUp 0.6s ease both; animation-delay: 0.2s; }
       <div class="tl-period">2021<br/>– 2026</div>
       <div class="tl-content">
         <div class="tl-role">Senior Research Associate in Dynamic Quantum Networks</div>
-        <div class="tl-org">University of Bristol</div>
-        <div class="tl-detail">Dynamic entanglement-based QKD network implementation; QKD post-processing pipeline in C++; distributed quantum computing interconnect and resource optimisation; QDCoF multi-user secure quantum data centre access network.</div>
-      </div>
-    </div>
-
-    <div class="tl-entry">
-      <div class="tl-period">2019<br/>– 2021</div>
-      <div class="tl-content">
-        <div class="tl-role">Research Associate</div>
-        <div class="tl-org">University of Edinburgh · School of Informatics</div>
-        <div class="tl-detail">Quantum Internet Alliance (QIA) — performance analysis and benchmarking of quantum cryptographic protocols including QKD and quantum digital signatures.</div>
+        <div class="tl-org">University of Bristol · School of EEME</div>
+        <div class="tl-detail">Dynamic entanglement-based QKD network implementation; QKD post-processing pipeline in C++; resource management in distributed quantum computing.</div>
       </div>
     </div>
 
@@ -1089,102 +1080,10 @@ h1.hero-name   { animation: fadeUp 0.6s ease both; animation-delay: 0.2s; }
 
 <div class="full-divider"></div>
 
-<!-- ── Active Projects ── -->
-<section id="projects">
-  <div class="section-label">Active projects</div>
-  <div class="section-title">Current work</div>
-  <div class="projects-grid">
-
-    <div class="proj-card">
-      <span class="proj-accent purple">2025 – present</span>
-      <h3>UK IQN Hub</h3>
-      <div class="proj-role">Research Co-Lead</div>
-      <p class="proj-desc">Leading blueprint architectures for scalable quantum networks including quantum repeater networks and entanglement distribution. Coordinating multi-partner research activities and technical direction.</p>
-    </div>
-
-    <div class="proj-card">
-      <span class="proj-accent blue">2025 – present</span>
-      <h3>VELOX-QP</h3>
-      <div class="proj-role">PI (Bristol)</div>
-      <p class="proj-desc">Leading research on design and development of architectures for interconnecting photonic quantum processor chips. Coordinating technical deliverables and progress reporting.</p>
-    </div>
-
-    <div class="proj-card">
-      <span class="proj-accent teal">2023 – present</span>
-      <h3>Allegro</h3>
-      <div class="proj-role">Lead Technical Rep — WP4 &amp; WP6</div>
-      <p class="proj-desc">Developing a hybrid QKD + PQC security plane architecture for ultra-low-energy optical transport networks, in collaboration with European partners.</p>
-    </div>
-
-  </div>
-</section>
-
-<div class="full-divider"></div>
-
-<!-- ── Honours ── -->
-<section>
-  <div class="section-label">Honours &amp; service</div>
-  <div class="section-title">Community &amp; recognition</div>
-  <div class="honours-grid">
-
-    <div class="honour-item">
-      <div class="h-icon">🏅</div>
-      <div class="h-text">
-        <strong>UK Global Talent Visa — Exceptional Promise</strong>
-        Endorsed by The Royal Academy of Engineering &amp; the UK Home Office (2022)
-      </div>
-    </div>
-
-    <div class="honour-item">
-      <div class="h-icon">🎤</div>
-      <div class="h-text">
-        <strong>Invited speaker</strong>
-        ECOC · QNetworks Workshop · UK Quantum Technologies Winter School
-      </div>
-    </div>
-
-    <div class="honour-item">
-      <div class="h-icon">🪑</div>
-      <div class="h-text">
-        <strong>Session chair</strong>
-        QNetworks 2026 · IEEE QCNC 2026 (two sessions)
-      </div>
-    </div>
-
-    <div class="honour-item">
-      <div class="h-icon">📋</div>
-      <div class="h-text">
-        <strong>Technical Programme Committee</strong>
-        IEEE INFOCOM 2025 · IEEE ICC 2024 &amp; 2026 · QNetworks 2026
-      </div>
-    </div>
-
-    <div class="honour-item">
-      <div class="h-icon">✏️</div>
-      <div class="h-text">
-        <strong>Reviewer</strong>
-        IEEE JLT · TCOM · JSAC · TNSM · TNET
-      </div>
-    </div>
-
-    <div class="honour-item">
-      <div class="h-icon">🔬</div>
-      <div class="h-text">
-        <strong>Panel member</strong>
-        STFC/EPSRC Quantum for Science Funding Opportunity — Scientific Exchange Visits
-      </div>
-    </div>
-
-  </div>
-</section>
-
-<div class="full-divider"></div>
-
 <!-- ── Contact ── -->
 <div class="contact-section" id="contact">
   <div class="section-label" style="justify-content:center">Contact</div>
   <h2 class="contact-title">Let's <strong>connect</strong></h2>
-  <p class="contact-sub">Open to collaborations, invited talks, and research conversations.</p>
   <div class="contact-links">
     <a class="btn btn-primary" href="mailto:sima.bahrani@bristol.ac.uk">✉ sima.bahrani@bristol.ac.uk</a>
     <a class="btn btn-secondary" href="https://scholar.google.com/citations?user=liMRZqwAAAAJ&sortby=pubdate" target="_blank">Google Scholar ↗</a>
